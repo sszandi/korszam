@@ -33,6 +33,14 @@ vector2<T> operator/=( T const& a )   //skal.-al osztás
     x/=a; y/=a;
     return *this;
 }
+    
+std::ostream& operator<<( std::ostream& o, vector2<T> const& v )
+{
+    o << v.x << "," << v.y;
+    return o;
+
+}   
+    
 
 };   
 
