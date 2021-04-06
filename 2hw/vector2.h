@@ -1,11 +1,13 @@
 #include <iostream>
 #include <cmath>
 
+
 template<typename T>
 
 class vector2 
 {
     public:
+
     T x,y;    
 
 vector2<T> operator+=( vector2<T> const& v )    // +=
@@ -22,13 +24,13 @@ vector2<T> operator-=( vector2<T> const& v )    // -=
 
 vector2<T> operator*=( T const& a)    //skal.-al szorzas
 {
-    x=a*x; y=a*y;
+    x*=a; y*=a;
     return *this;
 }
 
 vector2<T> operator/=( T const& a )   //skal.-al osztás
 {
-    x=x/a; y=y/a;
+    x/=a; y/=a;
     return *this;
 }
 
@@ -36,9 +38,9 @@ vector2<T> operator/=( T const& a )   //skal.-al osztás
 
 template<typename T>
 
-T skalszorzt( vector2<T> const& v , vector2<T> const& u )  // skalarszorzat
+T skalszorzat( vector2<T> const& v , vector2<T> const& u )  // skalaris szorzat
 {
-    return { v.x*u.x, v.y*u.y};
+    return { v.x*u.x + v.y*u.y};
 }
 
 template<typename T>
@@ -54,14 +56,40 @@ vector2<T> operator-( vector2<T> const& v , vector2<T> const& u )  // 2 vektor k
 }
 
 template<typename T>
-vector2<T> operator*( T const& a)  // skal.-al szorzas
+vector2<T> operator*( vector2<T> const& v,T const& a)  // skal.-al szorzas
 {
-    return vector2{ a*x, a*y};
+    return vector2<T>{ a*v.x, a*v.y};
 }
 
 template<typename T>
-double hossz( vector2<T> const& v )  // normalas
+vector2<T> operator*( T const& a, vector2<T> const& v)  // skal.-al szorzas
+{
+    return vector2<T>{ a*v.x, a*v.y};
+}
+
+template<typename T>
+T hossz( vector2<T> const& v )  // normalas
 {
     return sqrt( v.x*v.x+v.y*v.y );
 
 }
+
+
+template<typename T>
+ std::istream & operator>>(std::istream& in, vector2<T> &v )
+{
+    in >> v.x;
+    in >> v.y;
+    return in;
+
+}
+
+template<typename T>
+ std::ostream & operator<<(std::ostream& os, const vector2<T> &v )
+{
+    os << v.x << " " << v.y;
+    return os;
+
+}
+
+
