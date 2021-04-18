@@ -34,7 +34,7 @@ T dFun(T x, double h)  // hatodrendű közelítés
 
 // Integrál - középpontos-szabály:
 
-double mid(double f(double x),double a, double b, int n)  //feloszt kint??
+double mid(double f(double x),double a, double b, int n)  
 {
     double dx, M=0;
     dx = fabs(b-a)/n;
