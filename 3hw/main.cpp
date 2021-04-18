@@ -116,9 +116,9 @@ int main()
     file<<"A középpontos-szabállyal kapott eredmény: " << q1 << "\n";
     file<<"A trapéz szabállyal kapott eredmény: " << q2 << "\n";
     file<<"A Simpson-módszerrel kapott eredmény: " << q2 << "\n";
+    cout << q1 << ", " << q2 << ", " << q3;
     */
     
-    cout << q1 << ", " << q2 << ", " << q3;
     
     return 0;
 }
