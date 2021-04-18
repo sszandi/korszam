@@ -66,15 +66,34 @@ double trpz(double x, double a, double b, double n)
 }
 
 
-
-
 // 1/3 Simpson-szabály:
 
-double simpson(double x, double a, double b, int n)
+double simpson(double a, double b, int n)
 {
+    
+    double k, dx, result;
+   
+    dx = fabs(a - b)/n;    
+    result = Fun(a) + Fun(b);
 
+    for(int i=1; i<= n-1; i++ )
+    {
+        k = a + i*dx;
 
+    if(i%2==0)
+    {
+        result = result + 2 * (Fun(k));
+    }
+    else
+    {
+        result = result + 4 * (Fun(k));
+    }
 
+ }
+
+    result = result * n/3;
+
+    return result;
 }
 
 
