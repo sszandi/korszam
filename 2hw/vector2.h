@@ -76,7 +76,7 @@ vector2<T> operator*( T const& a, vector2<T> const& v)  // skal.-al szorzas
 }
 
 template<typename T>
-T hossz( vector2<T> const& v )  // normalas
+T hossz( vector2<T> const& v )  
 {
     return sqrt( v.x*v.x+v.y*v.y );
 
