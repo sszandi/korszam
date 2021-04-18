@@ -26,22 +26,28 @@ T dFun4(T x, double h) // negyedrendű közelítés
 }
 
 template <typename T>  
-T dFun(double x, double h)  // hatodrendű közelítés
+T dFun(T x, double h)  // hatodrendű közelítés
 {
     return ( 16*dFun4(x, h)-dFun4(x, 2*h) )/15; //h kint
+}
+
+double f(double x)
+{
+    double df = dFun(x,1);
+    return sqrt(1+(df*df));
 }
 
 
 // Integrál - Középpontos szabály:
 
-double mid(double x,double a, double b, int n)  //feloszt kint??
+double mid(double f(double x),double a, double b, int n)  //feloszt kint??
 {
     double dx, M, m;
     dx = fabs(b-a)/n;
     
     for (int i=0; i<n; i++)
     {
-        M += Fun( (a+(i*dx))/2) * dx;
+        M += f( (a+(i*dx))/2) * dx;
     }
 
     return M;
@@ -49,32 +55,32 @@ double mid(double x,double a, double b, int n)  //feloszt kint??
 }
 
 
-// trapéz-szabály:
+// Integrál - trapéz-szabály:
 
-double trpz(double x, double a, double b, double n)
+double trpz(double f(double x), double a, double b, double n)
 {
     double dx, sum, result;
     dx = fabs(b-a)/n;
     for( int i=1; i<n; i++ )
     {
-        sum +=Fun(a+i*dx);
+        sum +=f(a+i*dx);
     }
     
-    result = ( dx/2 )*( Fun(a)+Fun(b)+2*sum );
+    result = ( dx/2 )*( f(a)+f(b)+2*sum );
 
     return result;
 }
 
 
-// 1/3 Simpson-szabály:
+// Integrál - 1/3 Simpson-szabály:
 
-double simpson(double a, double b, int n)
+double simpson(double f(double x), double a, double b, int n)
 {
     
     double k, dx, result;
    
     dx = fabs(a - b)/n;    
-    result = Fun(a) + Fun(b);
+    result = f(a) + f(b);
 
     for(int i=1; i<= n-1; i++ )
     {
@@ -82,16 +88,16 @@ double simpson(double a, double b, int n)
 
     if(i%2==0)
     {
-        result = result + 2 * (Fun(k));
+        result += 2 * (f(k));
     }
     else
     {
-        result = result + 4 * (Fun(k));
+        result += 4 * (f(k));
     }
 
  }
 
-    result = result * n/3;
+    result *= n/3;
 
     return result;
 }
@@ -100,6 +106,8 @@ double simpson(double a, double b, int n)
 
 int main()
 {
+   
+
     
     return 0;
 }
