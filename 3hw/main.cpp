@@ -17,7 +17,7 @@ template <typename T>
 T dFun(double x)
 {
 
-
+//no
 
 
 }
