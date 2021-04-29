@@ -71,10 +71,10 @@ int main()
     q3 = analitikusan(T);
 
         
-    file<< "Newton" << "Runge-Kutta " << "Analitikus \n";
-    file<< q1 << q2 << q3 ;
+    file<< "Newton \t \t" << "Runge-Kutta \t" << "Analitikus \n";
+    file<< q1 << " \t " << q2 << " \t" << q3;   
     
-    std::cout << q1 << ", " << q2 << ", " << q3;   
+    // std::cout << q1 << ", \t " << q2 << ", \t" << q3;   
     
     return 0;
 }
