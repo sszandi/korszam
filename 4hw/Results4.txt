@@ -1,0 +1,2 @@
+Newton 	 	Runge-Kutta 	Analitikus 
+1.55531, 	 1.55741, 	1.55741
