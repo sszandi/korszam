@@ -199,11 +199,11 @@ double PerkStats::computeP_crit(Percolation& percolation)
 
 int main()
 {
-	unsigned int N;
+	int N;
 
 	std::cout << "\nComputing percolation treshold for a NxN grid\n";
 	std::cout << "\nEnter N:\n";
-    std::cin >> N;   
+        std::cin >> N;   
     
 	{ 
 		PerkStats computePerk(N);
