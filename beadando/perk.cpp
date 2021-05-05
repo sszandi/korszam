@@ -3,8 +3,12 @@
 #include <math.h>
 #include <iostream>
 #include <iomanip>  
+#include <algorithm> 
+#include <vector>
 
-typedef std::pair<double, int> pair;
+typedef std::pair<int, std::vector<int>> pair;
+//typedef std::pair<double, int> pair;
+
 
 Percolation::Percolation(int n) 	
 	: n(n),          //  grid
@@ -37,10 +41,23 @@ bool Percolation::checkOpen(int row, int col) const
 	return open_units[flattenRowCol(row,col)]; 
 }		
 
+
+bool PerkStats::checkOpen(int row, int col) const    //perkstats
+{
+	
+	return open_units[flattenRowCol(row,col)]; 
+}		
+
 int Percolation::openUnits() 
 {
 	return n_open;
 }
+
+int PerkStats::openUnits() 
+{
+	return n_open;
+}
+
 
 bool Percolation::checkPerc()
 {
@@ -50,6 +67,11 @@ bool Percolation::checkPerc()
 
 
 int Percolation::flattenRowCol(int row,int col) const  // row, col -ként megadott pozíció kilapítása 1D-be
+{															
+	return 1 + (row - 1)*n + (col - 1);
+}
+
+int PerkStats::flattenRowCol(int row,int col) const  // PerkStats-nak is 
 {															
 	return 1 + (row - 1)*n + (col - 1);
 }
@@ -156,12 +178,14 @@ void PerkStats::computeProb() //  p*  !
 	
 }
 
-double PerkStats::getpCrit()   
+int PerkStats::getpCrit()   
 {
 	return p_crit.first;
 }
 
-int PerkStats::getGrid()   
+std::vector<int> PerkStats::getGrid()   
+//int PerkStats::getGrid()   
+
 {
 	return p_crit.second;
 }
@@ -174,21 +198,32 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 	std::mt19937 eng(rd());  							 
 	std::uniform_int_distribution<> distr(1, n);  
 	
-	int open_units;
+	int OPENUNITS;  // U : (abrazolas) flatgrid unitja
 	int y, x;
 	//double p;
+	std::vector<int> gridU,gridX,gridY;
+	
+
 	
 	while ( !percolation.checkPerc() ) // addig amig enm perkolal, amig nem ér össze a virtualis sorokkal
 	{  
 		y = distr(eng);  //  sor
 		x = distr(eng);  //  oszlop
 		percolation.open(y, x);  // ezeknek a kinyitását végzi el a percolation-ön
-		open_units = percolation.openUnits(); //  mond meg a percolationről,h hany nyilt kocka van
-				
+		OPENUNITS = percolation.openUnits(); //  mond meg a percolationről,h hany nyilt kocka van
+
+		//gridU.reserve(open_units);
+
+		
+		gridU.push_back(flattenRowCol(y,x)); // ide bekerültek olyanok is,amik mar kinyiltak 1x,de csak kis grideknel venni észre	
+		
+						
 	}
 
+
 	
-	return pair((double)open_units/(n*n),open_units);  // erre a pair,h az open unitokat is odadja
+	// /(n*n)
+	return pair((int)OPENUNITS,gridU);  // erre a pair,h az open unitokat is odadja
 }
 
 
@@ -200,17 +235,92 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 
 int main()
 {
-	int N;
+	int N,lol;
+	std::vector<int> squares;
+	//int squares;
+	std::vector<bool> squares2;
 
 	std::cout << "\nComputing percolation treshold for a NxN grid\n";
 	std::cout << "\nEnter N:\n";
     std::cin >> N;   
+
     
 	{ 
 		PerkStats computePerk(N);
 
 		std::cout << "The critical p* is " << '\t' << std::setprecision(5) << computePerk.getpCrit() << '\n';
+				
+		squares=computePerk.getGrid();
+		lol=computePerk.getpCrit();
+
+		std::cout << squares[0] << '\n';
+
+
+
+
+    std::sort( squares.begin(), squares.end() );
+    squares.erase( std::unique(squares.begin(), squares.end()), squares.end() );
+
+	for (size_t  i=0; i < squares.size(); i++ )
+			{
+				std::cout<< squares.at(i) << ' ';
+
+			};
+			
+	squares2.assign(N*N, false); 
+
+for ( int i=0; i<lol; i++ )  
+		{                                
+			squares2[squares[i]-1] = true;   
+
+		};
+	
+
+
+std::cout<< "\n Nyitottak: "  << squares.size() ;
+std::cout<< "\n Osszes(N*N): " << squares2.size() << "\n";
+
+
+for (size_t i=0; i<squares2.size(); i++ ) 
+{
+	std::cout<< " Elem "  << squares2[i]  ;
+}
+
+
+std::cout<< "\n\n kockak: \n \n";
+	
+
+	
 		
+
+
+
+
+
+	
 	}
+
+for ( int i=0; i<N; i++ )   // sor
+		{
+			for ( int j=0; j<N; j++ )  // oszlop
+			{
+				if ( squares2[j]==true )
+				{
+					std::cout<< "1";
+
+				}
+
+				else
+				{
+					std::cout<< "0";
+
+				}
+
+				std::cout << std::endl;
+
+
+			}
+
+		} 
 
 }
