@@ -1,7 +1,7 @@
 #include <vector>
 #include <utility>
 
-class WQUni       // weighted quick union find
+class WQUni
 {
 	
 public:
@@ -84,8 +84,6 @@ private:
         
     int n_open{0};       
        
-    void checkValid(int row,int col) const;  
-
     void fuseTouchingUnits(int row,int col);
     
     int flattenRowCol(int row,int col) const;    
@@ -95,20 +93,23 @@ private:
 class PerkStats
 {
 	
-    
+    typedef std::pair<double, int> pair;
+
 public:
     
     PerkStats(int n);       
 
-    double getpCrit();      
+    double getpCrit();     
+     
+    int getGrid();
 
 private:
     
     int n;  
     
-    double p_crit;  
+    pair p_crit;  
 
-    double computeP_crit(Percolation& percolation);
+    pair computeP_crit(Percolation& percolation);
     
     void computeProb();  
     
