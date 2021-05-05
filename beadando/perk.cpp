@@ -222,8 +222,8 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 
 
 	
-	// /(n*n)
-	return pair((int)OPENUNITS,gridU);  // erre a pair,h az open unitokat is odadja
+	
+	return pair((int)OPENUNITS,gridU);  
 }
 
 
@@ -235,9 +235,9 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 
 int main()
 {
-	int N,lol;
+	int N,no_open;
 	std::vector<int> squares;
-	//int squares;
+	double p;
 	std::vector<bool> squares2;
 
 	std::cout << "\nComputing percolation treshold for a NxN grid\n";
@@ -246,58 +246,24 @@ int main()
 
     
 	{ 
-		PerkStats computePerk(N);
+	PerkStats computePerk(N);
 
-		//std::cout << "The critical p* is " << '\t' << std::setprecision(5) << computePerk.getpCrit() << '\n';
-				
-		squares=computePerk.getGrid();
-		lol=computePerk.getpCrit();
-
-		
-		
-
-
-
+	squares=computePerk.getGrid();
+	no_open=computePerk.getpCrit();	
+	p = no_open/(N*N);		
 
     std::sort( squares.begin(), squares.end() );
     squares.erase( std::unique(squares.begin(), squares.end()), squares.end() );
 
-	for (size_t  i=0; i < squares.size(); i++ )
-			{
-				std::cout<< squares.at(i) << ' ';
-
-			};
-			
+		
 	squares2.assign(N*N, false); 
 
-for ( int i=0; i<lol; i++ )  
+for ( int i=0; i<no_open; i++ )  
 		{                                
 			squares2[squares[i]-1] = true;   
 
 		};
 	
-
-
-
-		std::cout << "\n Nyitottak szama" << lol;
-		std::cout<< "\n Nyitottak squares.size-al: "  << squares.size() ;
-		std::cout << "\n  squares[0] - a nyitottak elso eleme " << squares[0] ;
-		std::cout<< "\n Osszes(N*N) a bool-osbolm squares2.size: " << squares2.size() << "\n";
-
-/*
-for (size_t i=0; i<squares2.size(); i++ ) 
-{
-	std::cout<< " boolos squares2 eleme: "  << squares2[i] << "\n"  ;
-}
-*/
-
-
-std::cout<< "\n\n kockak: \n \n";
-	
-
-
-	
-}
 
 for ( int i=1; i<N+1; i++ )   // sor
 		{
@@ -305,14 +271,14 @@ for ( int i=1; i<N+1; i++ )   // sor
 			{
 				if ( squares2[(1 + (i - 1)*N + (j - 1))-1]==1 )
 				{
-					std::cout<< "| |";
-					//std::cout << " \x205F";
+					std::cout<< " * ";
+					//std::cout << "\u2562";
 										
 				}
 
 				else
 				{
-					std::cout<< "|_|";
+					std::cout<<"|||" ;
 
 				}			
 
@@ -322,7 +288,9 @@ for ( int i=1; i<N+1; i++ )   // sor
 		}
 
 
-
+	std::cout << "\nThe critical p* is " << '\t' << p << '\n';
+	std::cout << "Number of open units " << '\t'  << no_open << '\n';
+}  //<<std::setprecision(10)
 
  
 
