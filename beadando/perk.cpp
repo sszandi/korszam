@@ -208,7 +208,7 @@ int main()
 	{ 
 		PerkStats computePerk(N);
 
-		std::cout << std::setw(30) << "The critical p* is " << '\t' << std::setprecision(10) << computePerk.getpCrit() << '\n';
+		std::cout <<"The critical p* is " << '\t' << std::setprecision(10) << computePerk.getpCrit() << '\n';
 		
 	}
 
