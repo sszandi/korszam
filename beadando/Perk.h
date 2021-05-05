@@ -10,7 +10,7 @@ public:
 	{
 		flatgrid.reserve(n);  							
 
-		for ( int i=0; i<=n; ++i )
+		for ( int i=0; i<=n; i++ )
 		{                                
 			flatgrid.push_back(i);  
 		};
@@ -93,15 +93,23 @@ private:
 class PerkStats
 {
 	
-    typedef std::pair<double, int> pair;
+    typedef std::pair<int, std::vector<int>> pair;
+	//typedef std::pair<double, int> pair;
 
 public:
     
     PerkStats(int n);       
 
-    double getpCrit();     
+    int getpCrit();     
      
-    int getGrid();
+    std::vector<int> getGrid();
+	//int getGrid();
+
+	int openUnits();
+
+	std::vector<bool> open_units;
+
+	
 
 private:
     
@@ -111,9 +119,13 @@ private:
 
     pair computeP_crit(Percolation& percolation);
     
-    void computeProb();  
+    void computeProb(); 
+
+	int flattenRowCol(int row,int col) const; 
     
-    
+    bool checkOpen(int row, int col) const;
+
+	int n_open{0}; 
 };
 
 
