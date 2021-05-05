@@ -1,7 +1,7 @@
 #include <vector>
 #include <utility>
 
-class WQUni
+class WQUni       // weighted quick union find
 {
 	
 public:
