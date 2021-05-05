@@ -95,8 +95,7 @@ private:
 class PerkStats
 {
 	
-    //typedef std::pair<int, int> pair;  // grid open unit-okhoz kell de az még nincs
-
+    
 public:
     
     PerkStats(int n);       
