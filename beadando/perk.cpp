@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iomanip>  
 
+typedef std::pair<double, int> pair;
+
 Percolation::Percolation(int n) 	
 	: n(n),          //  grid
 	n_units(n * n),  // összes unit
@@ -18,7 +20,7 @@ Percolation::Percolation(int n)
 
 void Percolation::open(int row,int col) // kinyit, ha még nem
 {
-	checkValid(row,col); 
+	 
 
 	if (!checkOpen(row,col)) {  // nyitva?
 		fuseTouchingUnits(row,col);  // ha nem nyitva, fusion
@@ -31,11 +33,9 @@ void Percolation::open(int row,int col) // kinyit, ha még nem
 
 bool Percolation::checkOpen(int row, int col) const  
 {
-	checkValid(row,col);  
-
+	
 	return open_units[flattenRowCol(row,col)]; 
-}
-		
+}		
 
 int Percolation::openUnits() 
 {
@@ -48,15 +48,6 @@ bool Percolation::checkPerc()
 										  
 }
 
-void Percolation::checkValid(int row,int col) const 
-													 
-{
-	if ( row < 1 || row > n || col < 1 || col > n ) 
-	{
-		std::cerr << "\nInvalid elements";
-		exit(EXIT_FAILURE);   
-	}
-}
 
 int Percolation::flattenRowCol(int row,int col) const  // row, col -ként megadott pozíció kilapítása 1D-be
 {															
@@ -167,10 +158,15 @@ void PerkStats::computeProb() //  p*  !
 
 double PerkStats::getpCrit()   
 {
-	return p_crit;
+	return p_crit.first;
 }
 
-double PerkStats::computeP_crit(Percolation& percolation)
+int PerkStats::getGrid()   
+{
+	return p_crit.second;
+}
+
+pair PerkStats::computeP_crit(Percolation& percolation)
 {
     // random kinyitogatás
     
@@ -180,17 +176,22 @@ double PerkStats::computeP_crit(Percolation& percolation)
 	
 	int open_units;
 	int y, x;
-
+	//double p;
+	
 	while ( !percolation.checkPerc() ) // addig amig enm perkolal, amig nem ér össze a virtualis sorokkal
 	{  
 		y = distr(eng);  //  sor
 		x = distr(eng);  //  oszlop
 		percolation.open(y, x);  // ezeknek a kinyitását végzi el a percolation-ön
 		open_units = percolation.openUnits(); //  mond meg a percolationről,h hany nyilt kocka van
+				
 	}
 
-	return (double)open_units/(n*n);  // erre a pair,h az open unitokat is odadja
+	
+	return pair((double)open_units/(n*n),open_units);  // erre a pair,h az open unitokat is odadja
 }
+
+
 
 
 //___________________________main____________________________________________________________
@@ -203,12 +204,12 @@ int main()
 
 	std::cout << "\nComputing percolation treshold for a NxN grid\n";
 	std::cout << "\nEnter N:\n";
-        std::cin >> N;   
+    std::cin >> N;   
     
 	{ 
 		PerkStats computePerk(N);
 
-		std::cout <<"The critical p* is " << '\t' << std::setprecision(10) << computePerk.getpCrit() << '\n';
+		std::cout << "The critical p* is " << '\t' << std::setprecision(5) << computePerk.getpCrit() << '\n';
 		
 	}
 
