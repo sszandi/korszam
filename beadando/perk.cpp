@@ -248,12 +248,13 @@ int main()
 	{ 
 		PerkStats computePerk(N);
 
-		std::cout << "The critical p* is " << '\t' << std::setprecision(5) << computePerk.getpCrit() << '\n';
+		//std::cout << "The critical p* is " << '\t' << std::setprecision(5) << computePerk.getpCrit() << '\n';
 				
 		squares=computePerk.getGrid();
 		lol=computePerk.getpCrit();
 
-		std::cout << squares[0] << '\n';
+		
+		
 
 
 
@@ -277,50 +278,52 @@ for ( int i=0; i<lol; i++ )
 	
 
 
-std::cout<< "\n Nyitottak: "  << squares.size() ;
-std::cout<< "\n Osszes(N*N): " << squares2.size() << "\n";
 
+		std::cout << "\n Nyitottak szama" << lol;
+		std::cout<< "\n Nyitottak squares.size-al: "  << squares.size() ;
+		std::cout << "\n  squares[0] - a nyitottak elso eleme " << squares[0] ;
+		std::cout<< "\n Osszes(N*N) a bool-osbolm squares2.size: " << squares2.size() << "\n";
 
+/*
 for (size_t i=0; i<squares2.size(); i++ ) 
 {
-	std::cout<< " Elem "  << squares2[i]  ;
+	std::cout<< " boolos squares2 eleme: "  << squares2[i] << "\n"  ;
 }
+*/
 
 
 std::cout<< "\n\n kockak: \n \n";
 	
 
-	
-		
-
-
-
-
 
 	
-	}
+}
 
-for ( int i=0; i<N; i++ )   // sor
+for ( int i=1; i<N+1; i++ )   // sor
 		{
-			for ( int j=0; j<N; j++ )  // oszlop
+			for ( int j=1; j<N+1; j++ )  // oszlop
 			{
-				if ( squares2[j]==true )
+				if ( squares2[(1 + (i - 1)*N + (j - 1))-1]==1 )
 				{
-					std::cout<< "1";
-
+					std::cout<< "| |";
+					//std::cout << " \x205F";
+										
 				}
 
 				else
 				{
-					std::cout<< "0";
+					std::cout<< "|_|";
 
-				}
-
-				std::cout << std::endl;
+				}			
 
 
 			}
+		std::cout << "\n";
+		}
 
-		} 
+
+
+
+ 
 
 }
