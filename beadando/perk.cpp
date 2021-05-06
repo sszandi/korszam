@@ -235,22 +235,22 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 
 int main()
 {
-	int N,no_open;
+	int N,lol;
 	std::vector<int> squares;
 	double p;
 	std::vector<bool> squares2;
 
-	std::cout << "\nComputing percolation treshold for a NxN grid\n";
+	std::cout << "\nComputing percolation treshold of NxN grid\n";
 	std::cout << "\nEnter N:\n";
     std::cin >> N;   
-
+	std::cout << "\n";
     
 	{ 
 	PerkStats computePerk(N);
 
 	squares=computePerk.getGrid();
-	no_open=computePerk.getpCrit();	
-	p = no_open/(N*N);		
+	lol=computePerk.getpCrit();	
+		
 
     std::sort( squares.begin(), squares.end() );
     squares.erase( std::unique(squares.begin(), squares.end()), squares.end() );
@@ -258,12 +258,14 @@ int main()
 		
 	squares2.assign(N*N, false); 
 
-for ( int i=0; i<no_open; i++ )  
+for ( int i=0; i<lol; i++ )  
 		{                                
 			squares2[squares[i]-1] = true;   
 
 		};
-	
+
+if ( N<36 )	
+{
 
 for ( int i=1; i<N+1; i++ )   // sor
 		{
@@ -286,11 +288,15 @@ for ( int i=1; i<N+1; i++ )   // sor
 			}
 		std::cout << "\n";
 		}
+}
+else std::cout << "Grid is not displayed above N=35 \n";
 
 
-	std::cout << "\nThe critical p* is " << '\t' << p << '\n';
-	std::cout << "Number of open units " << '\t'  << no_open << '\n';
-}  //<<std::setprecision(10)
+p = static_cast<double>(lol)/(N*N);	
+std::cout << "\nThe critical p* is " << '\t'<<std::setprecision(10) <<  p << '\n';
+std::cout << "Number of open units " << '\t'  << lol << '\n\n';
+//
+}  
 
  
 
