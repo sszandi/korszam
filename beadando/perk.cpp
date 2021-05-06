@@ -291,7 +291,7 @@ for ( int i=1; i<N+1; i++ )   // sor
 		std::cout << "\n";
 		}
 }
-else std::cout << "Grid is not displayed above N=35 \n";
+else std::cout << "Grid is not displayed if N>35 \n";
 
 
 p = OU/NN;	
