@@ -235,7 +235,7 @@ pair PerkStats::computeP_crit(Percolation& percolation)
 
 int main()
 {
-	int N,lol;
+	int N,OU;  // OU: open units
 	std::vector<int> squares;
 	double p;
 	std::vector<bool> squares2;
@@ -249,7 +249,7 @@ int main()
 	PerkStats computePerk(N);
 
 	squares=computePerk.getGrid();
-	lol=computePerk.getpCrit();	
+	OU=computePerk.getpCrit();	
 		
 
     std::sort( squares.begin(), squares.end() );
@@ -258,7 +258,7 @@ int main()
 		
 	squares2.assign(N*N, false); 
 
-for ( int i=0; i<lol; i++ )  
+for ( int i=0; i<OU; i++ )  
 		{                                
 			squares2[squares[i]-1] = true;   
 
@@ -292,9 +292,9 @@ for ( int i=1; i<N+1; i++ )   // sor
 else std::cout << "Grid is not displayed above N=35 \n";
 
 
-p = static_cast<double>(lol)/(N*N);	
+p = static_cast<double>(OU)/(N*N);	
 std::cout << "\nThe critical p* is " << '\t'<<std::setprecision(10) <<  p << '\n';
-std::cout << "Number of open units " << '\t'  << lol << '\n\n';
+std::cout << "Number of open units " << '\t'  << OU << '\n\n';
 //
 }  
 
