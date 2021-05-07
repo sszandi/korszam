@@ -23,10 +23,10 @@ public:
 	}
 
 	
-	void join(int y, int x)    // 
+	void join(int a, int b)   
 	{
-		int i = origin(y);  
-		int j = origin(x);
+		int i = origin(a);  
+		int j = origin(b);
 
 		if (i == j) return; // ha közös felső elemhez tartoznak akkor visszatér 
 
@@ -36,7 +36,7 @@ public:
 			size[j] += size[i];    // és 'j' mérete nől  'i'-ével
 		}
 
-		else   // ha forditva, i>j méreténél, forditva adodnak össze a méretek ...
+		else   // ha forditva, i>j méreténél, forditva adódnak össze a méretek ...
         {                 
 			flatgrid[j] = i ;
 			size[i] += size[j];
