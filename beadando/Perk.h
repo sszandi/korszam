@@ -28,7 +28,7 @@ public:
 		int i = origin(y);  
 		int j = origin(x);
 
-		if (i == j) return; // ha közös felső elemhez tartoznak akkor visszatér (nem join-olja egybe őket)
+		if (i == j) return; // ha közös felső elemhez tartoznak akkor visszatér 
 
 		if ( size[i] < size[j] )   // ez a rész Q.union mellett a weighting 
         { 
