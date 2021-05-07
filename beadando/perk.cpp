@@ -7,9 +7,10 @@
 int main()
 {
 	int N, OU; // OU: open units
-	std::vector<int> squares; 
+	std::vector<int> squares; // nyitott elemek pozíciója
+	std::vector<bool> squares2;  // nyitott elemek bool-ként
 	double p, NN; 
-	std::vector<bool> squares2; 
+	
 
 	std::cout << "\nComputing percolation treshold of NxN grid\n"; 
 	std::cout << "\nEnter N:\n"; 
@@ -17,7 +18,7 @@ int main()
 	std::cout << "\n"; 
  
 	{ 
-	PerkStats computePerk(N); 
+	PerkStats computePerk(N);  
 	squares=computePerk.getGrid(); 
 	OU=computePerk.getpCrit(); 
 	}
@@ -27,24 +28,25 @@ int main()
 	p = OU/NN; 		
 
  	std::sort(squares.begin(), squares.end()); 
- 	squares.erase(std::unique(squares.begin(), squares.end()), squares.end()); 
-		
+ 	squares.erase(std::unique(squares.begin(), squares.end()), squares.end()); 		
 	squares2.assign(N*N, false); 
+
+	// kirajzolás
 
 	for ( int i=0; i<OU; i++ ) 
 			{        
-				squares2[squares[i]-1] = true; 
+				squares2[squares[i]-1] = true;  // azok értékét változtatom meg, amik indexe szerepel a nyitott elmek pozíciójaként
 
 			}; 
 
-	if ( N<36 )	
+	if ( N<36 )	  // túl nagy kockát nem jeléenít meg
 	{
 
 	for ( int i=1; i<N+1; i++ ) // sor
 			{
 				for ( int j=1; j<N+1; j++ ) // oszlop
 				{
-					if ( squares2[(1 + (i - 1)*N + (j - 1))-1]==1 )
+					if ( squares2[(1 + (i - 1)*N + (j - 1))-1]==1 )  
 					{
 						std::cout<< " * "; 
 																
