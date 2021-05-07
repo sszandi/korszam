@@ -49,7 +49,7 @@ public:
 	}
 
 private:
-	std::vector<int> flatgrid,size;
+	std::vector<int> flatgrid, size;
 
 	int origin(int i) const   //  mi az origin-je az adott elemnek a grid-ben
 	{
@@ -65,7 +65,7 @@ class Percolation
 	
 	int N; 
 
-    int n_units;
+    int n_units;  // összes elem
 
     WQUni wqu;  // a WQUnion-tól származik  
 
