@@ -45,8 +45,7 @@ public:
 
     bool connected(int y, int x) const   
 	{
-		return origin(y) == origin(x);  // origin(a legelső elem, ami fent van és ezek alatta vannak) 
-									    // ha egyezik a origin-juk, akkor kapcsolatban van a felső oldallal (nyílt path)
+		return origin(y) == origin(x);  // // ha egyezik a origin-juk, akkor össze vannak kapcsolva 
 	}
 
 private:
