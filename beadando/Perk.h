@@ -43,9 +43,9 @@ public:
 		}
 	}
 
-    bool connected(int y, int x) const   
+    bool connected(int a, int b) const   
 	{
-		return origin(y) == origin(x);  // // ha egyezik a origin-juk, akkor össze vannak kapcsolva 
+		return origin(a) == origin(b);  // ha egyezik a origin-juk, akkor össze vannak kapcsolva 
 	}
 
 private:
